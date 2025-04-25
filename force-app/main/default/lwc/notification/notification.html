@@ -1,0 +1,15 @@
+<template>
+    <template if:true={showNotification}>
+        <div class="notification-container">
+            <div class={notificationClass}>
+                <lightning-icon icon-name={iconName} size="small" class="notification-icon"></lightning-icon>
+                <div class="notification-content">
+                    <p>{message}</p>
+                </div>
+                <button class="notification-close" onclick={closeNotification}>
+                    <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                </button>
+            </div>
+        </div>
+    </template>
+</template>

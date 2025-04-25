@@ -1,0 +1,100 @@
+<template>
+  <c-notification></c-notification>
+  <div class="app">
+      <!-- Add New Note Card -->
+      <div class="note-card add-note" onclick={createNoteHandler}>
+          <div class="add-note-content">
+              <div class="add-icon-container">
+                  <lightning-icon icon-name="utility:add" size="large" class="add-icon"></lightning-icon>
+              </div>
+              <h2 class="add-note-title">Create New Note</h2>
+          </div>
+      </div>
+
+      <!-- Notes List -->
+      <template for:each={noteList} for:item="note">
+          <div class="note-card" key={note.Id}>
+              <div class="note-header">
+                  <h2 class="note-title slds-truncate" title={note.Name}>{note.Name}</h2>
+                  <div class="note-actions">
+                      <lightning-button-icon 
+                          icon-name="utility:edit" 
+                          variant="bare" 
+                          alternative-text="Edit" 
+                          title="Edit" 
+                          class="edit-button"
+                          data-recordid={note.Id}
+                          onclick={editNoteHandler}>
+                      </lightning-button-icon>
+                      <lightning-button-icon 
+                          icon-name="utility:delete" 
+                          variant="bare" 
+                          alternative-text="Delete" 
+                          title="Delete" 
+                          class="delete-button"
+                          data-recordid={note.Id}
+                          onclick={deleteNoteHandler}>
+                      </lightning-button-icon>
+                  </div>
+              </div>
+              <div class="note-content">
+                  <c-append-html result={note.Note_Description__c}></c-append-html>
+              </div>
+              <div class="note-footer">
+                  <div class="note-date">{note.formattedDate}</div>
+                  <div class="note-category">{note.Category__c}</div>
+              </div>
+          </div>
+      </template>
+  </div>
+
+  <!-- Modal for Create/Edit Note -->
+  <template if:true={showModal}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+          <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                  <h2 class="slds-modal__title">{modalTitle}</h2>
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeModalHandler}>
+                      <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                  </button>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium">
+                  <form>
+                      <lightning-input 
+                          type="text" 
+                          label="Title" 
+                          name="Name" 
+                          value={noteRecord.Name} 
+                          class="slds-m-bottom_medium" 
+                          onchange={changeHandler}
+                          required>
+                      </lightning-input>
+
+                      <lightning-combobox
+                          name="Category__c"
+                          label="Category"
+                          value={noteRecord.Category__c}
+                          options={categoryOptions}
+                          onchange={changeHandler}
+                          class="slds-m-bottom_medium">
+                      </lightning-combobox>
+
+                      <lightning-input-rich-text
+                          value={noteRecord.Note_Description__c}
+                          name="Note_Description__c"
+                          label="Note Content"
+                          label-visible
+                          formats={formats}
+                          onchange={changeHandler}>
+                      </lightning-input-rich-text>
+                  </form>
+              </div>
+              <footer class="slds-modal__footer">
+                  <button class="slds-button slds-button_neutral" onclick={closeModalHandler}>Cancel</button>
+                  <button class="slds-button slds-button_brand" onclick={formSubmitHandler} disabled={isFormInvalid}>{submitButtonLabel}</button>
+              </footer>
+          </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

@@ -1,0 +1,153 @@
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+.note-card {
+  width: 300px;
+  height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.note-header {
+  padding: 16px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-title {
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button,
+.delete-button {
+  --sds-c-icon-color-foreground-default: white;
+}
+
+.note-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  font-size: 14px;
+  color: #333;
+}
+
+.note-footer {
+  padding: 12px 16px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.note-date {
+  color: #666;
+  font-style: italic;
+}
+
+.note-category {
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 500;
+}
+
+/* Add Note Card Styles */
+.add-note {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-note:hover {
+  background: linear-gradient(135deg, #e0e6ed, #b1bfd4);
+}
+
+.add-note-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-icon-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.add-icon {
+  --sds-c-icon-color-foreground-default: white;
+}
+
+.add-note-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Modal Styles */
+.slds-modal__header {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  border-radius: 4px 4px 0 0;
+}
+
+.slds-modal__title {
+  color: white;
+}
+
+.slds-button_icon-inverse {
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app {
+    justify-content: center;
+  }
+
+  .note-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}
